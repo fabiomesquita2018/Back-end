@@ -38,6 +38,7 @@ pip install -r requirements.txt
 
 ### 3. Como executar a aplicação
 pip install flask -cors
+pip install flasgger
 python app.py
 
 Para executar a API  basta executar:

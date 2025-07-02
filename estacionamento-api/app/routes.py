@@ -9,6 +9,33 @@ main = Blueprint('main', __name__)
 # Rota que define a inserção de um carro no estacionamento
 @main.route('/carros', methods=['POST'])
 def adicionar_carro():
+    """
+    Adiciona um carro ao estacionamento.
+    ---
+    tags:
+      - Carros
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            marca:
+              type: string
+            placa:
+              type: string
+            entrada:
+              type: string
+              example: "2025-07-02 10:00:00"
+            saida:
+              type: string
+              example: "2025-07-02 18:00:00"
+    responses:
+      201:
+        description: Carro adicionado com sucesso
+      400:
+        description: Erro ao adicionar carro
+    """
     data = request.get_json()
     try:
         carro = Carro(
@@ -25,11 +52,36 @@ def adicionar_carro():
 
 @main.route('/carros', methods=['GET'])
 def listar_carros():
+    """
+    Lista todos os carros cadastrados.
+    ---
+    tags:
+      - Carros
+    responses:
+      200:
+        description: Lista de carros
+    """
     carros = Carro.query.all()
     return jsonify([c.to_dict() for c in carros])
 
 @main.route('/carros/<int:id>', methods=['DELETE'])
 def deletar_carro(id):
+    """
+    Remove um carro pelo ID.
+    ---
+    tags:
+      - Carros
+    parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+    responses:
+      200:
+        description: Carro removido
+      404:
+        description: Carro não encontrado
+    """
     carro = Carro.query.get(id)
     if carro:
         db.session.delete(carro)
@@ -39,6 +91,30 @@ def deletar_carro(id):
 
 @main.route('/carros/filtrar', methods=['GET'])
 def filtrar_carros():
+    """
+    Filtra carros por marca, placa e datas de entrada.
+    ---
+    tags:
+      - Carros
+    parameters:
+      - in: query
+        name: marca
+        type: string
+      - in: query
+        name: placa
+        type: string
+      - in: query
+        name: entrada_de
+        type: string
+        example: "2025-07-01"
+      - in: query
+        name: entrada_ate
+        type: string
+        example: "2025-07-02"
+    responses:
+      200:
+        description: Lista de carros filtrados
+    """
     query = Carro.query
     marca = request.args.get('marca')
     placa = request.args.get('placa')
