@@ -1,11 +1,11 @@
-# 🚗 API de Estacionamento com Flask + SQLite
+# API de Estacionamento com Flask + SQLite
 
 Este pequeno projeto faz parte do material diático da Disciplina **Desenvolvimento Full Stack Básico** 
 Esta é uma API RESTful desenvolvida com Python, Flask e SQLite para gerenciar a entrada e saída de veículos em um estacionamento.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - Python 3.10+
 - Flask 2.3.3
@@ -14,7 +14,7 @@ Esta é uma API RESTful desenvolvida com Python, Flask e SQLite para gerenciar a
 
 ---
 
-## 📦 Instalação
+## Instalação
 
 Será necessário ter todas as libs python listadas no `requirements.txt` instaladas.
 Após clonar o repositório, é necessário ir ao diretório raiz, pelo terminal, para poder executar os comandos descritos abaixo.
@@ -23,8 +23,7 @@ Após clonar o repositório, é necessário ir ao diretório raiz, pelo terminal
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/fabiomesquita2018/EstacionamentoRioPark/estacionamento-api.git
-cd estacionamento-api
+git clone https://github.com/fabiomesquita2018/Back-end.git
 ```
 ### 2.Crie e ative um ambiente virtual
 
@@ -38,7 +37,7 @@ source venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
 
 ### 3. Como executar a aplicação
-
+pip install flask -cors
 python app.py
 
 Para executar a API  basta executar:
@@ -50,8 +49,9 @@ http://127.0.0.1:5000
 
 ### 🔹 POST /carros - Inserir um novo carro
 - **Requisição**: `POST /carros`
-
-```
+ **Resposta**:   "mensagem": "Carro adicionado com sucesso"
+- **Corpo da requisição**: 
+```bash
 exemplo:
 
 {
@@ -62,10 +62,21 @@ exemplo:
   
   }
   ```
-  
+  ### 🔹 GET /carros - Pesquisar carros
+- **Requisição**: `GET /carros`
+- **Resposta**: Retorna todos os carros registrados.
+  http://127.0.0.1:5000/carros
 
+   ### 🔹 GET /carros - Pesquisar carros com filtro
+ - **Requisição**: `GET /carros/filtrar?placa=LKG6814`
+ - **Resposta**: Retorna todos os carros registrados com a placa LKG6814
+http://127.0.0.1:5000/carros/filtrar?placa=LKG6814
 
-
+### 🔹 DELETE /carros - deletar carros
+- **Requisição**: `DELETE /carros`
+- **Resposta**: Deleta o carro com um determinado id registrado
+- **Corpo da requisição**:
+http://127.0.0.1:5000/carros/1
 
 
 

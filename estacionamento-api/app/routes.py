@@ -3,8 +3,10 @@ from .models import Carro
 from . import db
 from datetime import datetime
 
-main = Blueprint('main', __name__)
 
+main = Blueprint('main', __name__)
+# Rotas do aplicativo MVP para gerenciar carros em um estacionamento
+# Rota que define a inserção de um carro no estacionamento
 @main.route('/carros', methods=['POST'])
 def adicionar_carro():
     data = request.get_json()
@@ -53,3 +55,5 @@ def filtrar_carros():
         query = query.filter(Carro.entrada <= datetime.strptime(entrada_ate, "%Y-%m-%d"))
 
     return jsonify([c.to_dict() for c in query.all()])
+
+
