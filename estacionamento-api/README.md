@@ -28,6 +28,7 @@ git clone https://github.com/fabiomesquita2018/Back-end.git
 ### 2.Crie e ative um ambiente virtual
 
 python -m venv venv
+
 venv\Scripts\activate  # Windows
 # ou
 source venv/bin/activate  # Linux/macOS
@@ -38,7 +39,9 @@ pip install -r requirements.txt
 
 ### 3. Como executar a aplicação
 pip install flask -cors
+
 pip install flasgger
+
 python app.py
 
 Para executar a API  basta executar:
